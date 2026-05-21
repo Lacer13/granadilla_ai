@@ -1,0 +1,24 @@
+Benchmark YOLO Tiny en Raspberry Pi
+
+Resultados obtenidos:
+
+YOLOv3-Tiny 320x320:
+- Tiempo promedio: 0.1354 s
+- FPS promedio: 7.39
+
+YOLOv3-Tiny 416x416:
+- Tiempo promedio: 0.3119 s
+- FPS promedio: 3.21
+
+YOLOv4-Tiny 320x320:
+- Tiempo promedio: 0.1547 s
+- FPS promedio: 6.46
+
+YOLOv4-Tiny 416x416:
+- Tiempo promedio: 0.3067 s
+- FPS promedio: 3.26
+
+Decision inicial:
+- Modelo base: YOLOv3-Tiny
+- Tamano de entrada inicial: 320x320
+- Modelo alternativo para comparar con fotos reales: YOLOv4-Tiny 320x320

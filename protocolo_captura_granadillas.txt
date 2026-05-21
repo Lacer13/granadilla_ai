@@ -1,0 +1,33 @@
+Protocolo inicial de captura de imagenes para granadillas
+
+Objetivo:
+Capturar imagenes utiles para entrenar un modelo YOLO Tiny capaz de detectar y clasificar granadillas segun su estado visual.
+
+Clases iniciales:
+1. granadilla_buena
+2. granadilla_golpeada
+3. granadilla_inmadura
+
+Recomendaciones de captura:
+- Usar fondo uniforme y contrastante.
+- Evitar sombras fuertes.
+- Mantener distancia fija entre camara y granadilla.
+- Tomar imagenes con luz de dia, tarde y condiciones de iluminacion artificial.
+- Capturar diferentes orientaciones de la fruta.
+- Evitar imagenes borrosas.
+- Capturar imagenes con una sola granadilla y tambien con varias si el sistema lo necesitara.
+- Incluir una referencia de escala para medir tamano, por ejemplo una regla o patron conocido.
+
+Cantidad inicial recomendada:
+- 150 imagenes de granadilla_buena
+- 150 imagenes de granadilla_golpeada
+- 150 imagenes de granadilla_inmadura
+
+Division recomendada:
+- 70% entrenamiento
+- 20% validacion
+- 10% prueba
+
+Notas:
+- El modelo YOLO detectara y clasificara el estado.
+- OpenCV estimara el tamano usando la caja detectada y una escala px/cm.

@@ -1,0 +1,8 @@
+path: /home/pi/granadilla_ai/dataset
+train: images/train
+val: images/val
+
+names:
+  0: granadilla_buena
+  1: granadilla_golpeada
+  2: granadilla_inmadura
