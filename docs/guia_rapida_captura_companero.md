@@ -100,3 +100,31 @@ Opciones disponibles:
 Recomendacion:
 
 Antes de capturar imagenes reales, probar primero la opcion 1 con una imagen de prueba y luego revisar la carpeta captures/pruebas/.
+
+## 8. Comprimir imagenes capturadas
+
+Cuando se terminen de tomar fotos, ejecutar:
+
+python scripts/package_captures.py
+
+El archivo comprimido se guardara en:
+
+exports/
+
+Ese archivo ZIP puede subirse a Google Drive, Roboflow o enviarse para etiquetado.
+
+## 9. Registrar sesion de captura
+
+Despues de cada sesion, actualizar el archivo:
+
+dataset_management/control_capturas.csv
+
+Registrar:
+
+- fecha
+- responsable
+- clase
+- cantidad de fotos
+- lugar
+- iluminacion
+- observaciones
