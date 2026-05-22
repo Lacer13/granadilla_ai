@@ -1,0 +1,7 @@
+pillow
+imutils
+tqdm
+requests
+pyyaml
+matplotlib
+pandas
