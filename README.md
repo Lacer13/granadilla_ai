@@ -1,5 +1,8 @@
 # Sistema de deteccion y clasificacion de granadillas
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Lacer13/granadilla_ai/blob/main/notebooks/yolo_tiny_granadilla_training.ipynb)
+
+
 Proyecto basado en Raspberry Pi, OpenCV y modelos YOLO Tiny para la deteccion, clasificacion y medicion de granadillas.
 
 ## Objetivo
