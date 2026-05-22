@@ -1,0 +1,5 @@
+model,input_size,iterations,avg_time_s,avg_time_ms,fps,device,backend,target,notes
+yolov3_tiny,320x320,30,0.1354,135.4,7.39,Raspberry Pi 4,OpenCV DNN,CPU,Primer benchmark con imagen dog.jpg
+yolov3_tiny,416x416,30,0.3119,311.9,3.21,Raspberry Pi 4,OpenCV DNN,CPU,Primer benchmark con imagen dog.jpg
+yolov4_tiny,320x320,30,0.1547,154.7,6.46,Raspberry Pi 4,OpenCV DNN,CPU,Primer benchmark con imagen dog.jpg
+yolov4_tiny,416x416,30,0.3067,306.7,3.26,Raspberry Pi 4,OpenCV DNN,CPU,Primer benchmark con imagen dog.jpg
