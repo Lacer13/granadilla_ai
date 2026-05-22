@@ -80,3 +80,23 @@ Esto mostrara el total de imagenes en:
 - inmaduras
 - pruebas
 
+
+## 7. Menu interactivo de captura
+
+Para evitar escribir comandos largos, se puede usar el menu interactivo:
+
+python scripts/capture_menu.py
+
+Opciones disponibles:
+
+1. Capturar imagen de prueba.
+2. Capturar granadilla buena.
+3. Capturar granadilla golpeada.
+4. Capturar granadilla inmadura.
+5. Captura multiple.
+6. Contar imagenes capturadas.
+7. Salir.
+
+Recomendacion:
+
+Antes de capturar imagenes reales, probar primero la opcion 1 con una imagen de prueba y luego revisar la carpeta captures/pruebas/.
