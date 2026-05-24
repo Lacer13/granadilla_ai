@@ -184,3 +184,29 @@ Importante:
 Para que las teclas funcionen, primero hacer clic sobre la ventana de la camara.
 
 Esta opcion es recomendada cuando se desea acomodar manualmente la granadilla y capturarla en diferentes posiciones.
+
+## Resolucion y calidad de imagen
+
+La Raspberry Pi Camera Module 3 permite capturar imagenes de alta resolucion.
+
+Presets disponibles en los scripts:
+
+- hd: 1280 x 720
+- fhd: 1920 x 1080
+- qhd: 2304 x 1296
+- full: 4608 x 2592
+
+Recomendacion:
+
+- Usar hd para vista en vivo.
+- Usar fhd para capturar el dataset.
+- Usar qhd si se necesita ver mejor manchas o golpes.
+- Usar full solo para pruebas puntuales, porque genera archivos mas pesados y puede ser mas lento.
+
+Ejemplo captura Full HD:
+
+python scripts/capture_dataset_images.py --class-name buena --count 30 --interval 2 --resolution fhd --focus-mode continuous
+
+Ejemplo captura con mas detalle:
+
+python scripts/capture_dataset_images.py --class-name buena --count 30 --interval 2 --resolution qhd --focus-mode continuous

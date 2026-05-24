@@ -48,7 +48,11 @@ def capture_single(class_name):
         "--delay",
         "3",
         "--samples",
-        "3"
+        "3",
+        "--resolution",
+        "fhd",
+        "--jpeg-quality",
+        "95"
     ]
     run_command(command)
 
@@ -67,7 +71,11 @@ def capture_multiple(class_name, count, interval):
         "--warmup",
         "3",
         "--samples",
-        "3"
+        "3",
+        "--resolution",
+        "fhd",
+        "--jpeg-quality",
+        "95"
     ]
     run_command(command)
 
