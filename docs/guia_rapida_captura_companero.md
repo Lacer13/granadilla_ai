@@ -128,3 +128,35 @@ Registrar:
 - lugar
 - iluminacion
 - observaciones
+
+## Vista en vivo de la camara
+
+Antes de capturar fotos reales, se recomienda abrir la vista en vivo:
+
+python scripts/live_camera_preview.py
+
+Tambien se puede abrir desde el menu:
+
+python scripts/capture_menu.py
+
+Opcion recomendada:
+
+1. Ver camara en vivo
+
+Durante la vista en vivo:
+
+- Presionar q para salir.
+- Presionar ESC para salir.
+- Presionar s para guardar una imagen de prueba.
+- Presionar r para reenfocar.
+
+La vista en vivo sirve para:
+
+- acomodar la granadilla
+- revisar enfoque
+- revisar iluminacion
+- revisar sombras
+- revisar distancia camara-fruta
+- verificar que el fondo sea uniforme
+
+Antes de capturar el dataset real, usar primero la vista en vivo y ajustar la posicion de la granadilla.

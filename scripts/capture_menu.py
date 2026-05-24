@@ -1,7 +1,8 @@
 import subprocess
-from pathlib import Path
+import sys
 
-BASE = Path.home() / "granadilla_ai"
+PYTHON = sys.executable
+
 
 def run_command(command):
     print("")
@@ -13,51 +14,78 @@ def run_command(command):
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError:
         print("Error al ejecutar el comando.")
+    except KeyboardInterrupt:
+        print("Proceso interrumpido por el usuario.")
 
-def capture_single(class_name):
+def live_preview():
     command = [
-        "python",
-        "scripts/capture_single_image.py",
-        "--class-name",
-        class_name
+        PYTHON,
+        "scripts/live_camera_preview.py",
+        "--focus-mode",
+        "continuous",
+        "--warmup",
+        "2"
     ]
     run_command(command)
 
 
+def check_camera():
+    command = [
+        PYTHON,
+        "scripts/check_camera_controls.py"
+    ]
+    run_command(command)
+
+
+def capture_single(class_name):
+    command = [
+        PYTHON,
+        "scripts/capture_single_image.py",
+        "--class-name",
+        class_name,
+        "--focus-mode",
+        "trigger",
+        "--delay",
+        "3",
+        "--samples",
+        "3"
+    ]
+    run_command(command)
+
 def capture_multiple(class_name, count, interval):
     command = [
-        "python",
+        PYTHON,
         "scripts/capture_dataset_images.py",
         "--class-name",
         class_name,
         "--count",
         str(count),
         "--interval",
-        str(interval)
+        str(interval),
+        "--focus-mode",
+        "continuous",
+        "--warmup",
+        "3",
+        "--samples",
+        "3"
     ]
     run_command(command)
 
 
 def count_images():
     command = [
-        "python",
+        PYTHON,
         "scripts/count_captures.py"
     ]
     run_command(command)
 
-def show_menu():
-    print("")
-    print("====================================")
-    print(" MENU DE CAPTURA DE GRANADILLAS")
-    print("====================================")
-    print("1. Capturar imagen de prueba")
-    print("2. Capturar granadilla buena")
-    print("3. Capturar granadilla golpeada")
-    print("4. Capturar granadilla inmadura")
-    print("5. Captura multiple")
-    print("6. Contar imagenes capturadas")
-    print("7. Salir")
-    print("====================================")
+
+def package_captures():
+    command = [
+        PYTHON,
+        "scripts/package_captures.py"
+    ]
+    run_command(command)
 
 def ask_multiple_capture():
     print("")
@@ -91,30 +119,57 @@ def ask_multiple_capture():
 
     capture_multiple(class_name, count, interval)
 
+def show_menu():
+    print("")
+    print("====================================")
+    print(" MENU DE CAPTURA DE GRANADILLAS")
+    print(" Raspberry Pi Camera Module 3")
+    print("====================================")
+    print("1. Ver camara en vivo")
+    print("2. Verificar controles de camara")
+    print("3. Capturar imagen de prueba")
+    print("4. Capturar granadilla buena")
+    print("5. Capturar granadilla golpeada")
+    print("6. Capturar granadilla inmadura")
+    print("7. Captura multiple")
+    print("8. Contar imagenes capturadas")
+    print("9. Comprimir capturas")
+    print("10. Salir")
+    print("====================================")
+
 def main():
     while True:
         show_menu()
         option = input("Selecciona una opcion: ").strip()
 
         if option == "1":
-            capture_single("prueba")
+            live_preview()
 
         elif option == "2":
-            capture_single("buena")
+            check_camera()
 
         elif option == "3":
-            capture_single("golpeada")
+            capture_single("prueba")
 
         elif option == "4":
-            capture_single("inmadura")
+            capture_single("buena")
 
         elif option == "5":
-            ask_multiple_capture()
+            capture_single("golpeada")
 
         elif option == "6":
-            count_images()
+            capture_single("inmadura")
 
         elif option == "7":
+            ask_multiple_capture()
+
+        elif option == "8":
+            count_images()
+
+        elif option == "9":
+            package_captures()
+
+        elif option == "10":
             print("Saliendo del menu.")
             break
 
