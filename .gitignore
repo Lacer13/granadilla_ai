@@ -22,3 +22,9 @@ results/*.csv
 # Archivos temporales
 .DS_Store
 .ipynb_checkpoints/
+
+# Backups locales generados durante pruebas
+README_backup*.md
+scripts/*_backup*.py
+scripts/*_backup_*.py
+exports/
