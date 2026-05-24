@@ -235,3 +235,42 @@ Dentro de la ventana en vivo:
 - 4 guarda como prueba.
 - r reenfoca.
 - q sale.
+
+## Interfaz de deteccion Granadilla Diaz
+
+La interfaz de deteccion se abre con:
+
+python scripts/granadilla_detection_app.py
+
+Funciones principales:
+
+- Cargar modelo YOLO.
+- Iniciar camara.
+- Iniciar deteccion.
+- Seleccionar resolucion.
+- Seleccionar entrada YOLO: 320 o 416.
+- Escribir confianza minima manualmente.
+- Escribir NMS manualmente.
+- Ver FPS.
+- Ver tiempo de inferencia.
+- Ver resultado dominante.
+- Ver conteo de buenas, malas, golpeadas, inmaduras y total.
+- Guardar imagen detectada.
+
+Valores recomendados iniciales:
+
+Confianza minima: 0.35
+NMS: 0.40
+Entrada YOLO: 320 para velocidad, 416 para mayor precision.
+
+Clases del modelo:
+
+- granadilla_buena
+- granadilla_golpeada
+- granadilla_inmadura
+
+Nota:
+
+La clase "mala" no se entrena directamente. En la interfaz:
+
+Malas = golpeadas + inmaduras
