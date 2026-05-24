@@ -210,3 +210,28 @@ python scripts/capture_dataset_images.py --class-name buena --count 30 --interva
 Ejemplo captura con mas detalle:
 
 python scripts/capture_dataset_images.py --class-name buena --count 30 --interval 2 --resolution qhd --focus-mode continuous
+
+## Seleccion rapida de calidad desde el menu
+
+Al abrir la vista en vivo desde el menu, se puede seleccionar la calidad con un numero:
+
+1. HD    1280 x 720    rapido
+2. FHD   1920 x 1080   recomendado para dataset
+3. QHD   2304 x 1296   mas detalle
+4. FULL  4608 x 2592   maxima calidad, mas lento
+
+Recomendacion:
+
+- Usar HD solo para acomodar rapidamente.
+- Usar FHD para capturar el dataset.
+- Usar QHD si se necesita ver mejor manchas o golpes.
+- Usar FULL solo para pruebas puntuales.
+
+Dentro de la ventana en vivo:
+
+- 1 guarda como granadilla buena.
+- 2 guarda como granadilla golpeada.
+- 3 guarda como granadilla inmadura.
+- 4 guarda como prueba.
+- r reenfoca.
+- q sale.

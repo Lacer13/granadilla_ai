@@ -11,6 +11,8 @@ from camera_utils import (
     calculate_sharpness,
     frame_to_bgr,
     save_capture_metadata,
+    get_resolution_preset,
+    save_jpeg,
 )
 
 BASE = Path.home() / "granadilla_ai"
@@ -48,12 +50,13 @@ def save_live_frame(frame_bgr, metadata, class_name, sharpness):
     filename = f"{class_name}_live_{timestamp}.jpg"
     output_path = output_folder / filename
 
-    cv2.imwrite(str(output_path), frame_bgr)
+    save_jpeg(output_path, frame_bgr, quality=95)
 
     extra_data = {
         "class_name": class_name,
         "source": "live_camera_preview",
-        "sharpness_score": sharpness
+        "sharpness_score": sharpness,
+        "resolution_preset": "live_selected"
     }
 
     metadata_path = save_capture_metadata(
@@ -75,17 +78,31 @@ def main():
     )
 
     parser.add_argument(
+        "--resolution",
+        choices=["hd", "fhd", "qhd", "full", "custom"],
+        default="hd",
+        help="Preset de resolucion: hd, fhd, qhd, full o custom"
+    )
+
+    parser.add_argument(
         "--width",
         type=int,
         default=1280,
-        help="Ancho de vista previa"
+        help="Ancho si se usa custom"
     )
 
     parser.add_argument(
         "--height",
         type=int,
         default=720,
-        help="Alto de vista previa"
+        help="Alto si se usa custom"
+    )
+
+    parser.add_argument(
+        "--jpeg-quality",
+        type=int,
+        default=95,
+        help="Calidad JPEG entre 1 y 100"
     )
 
     parser.add_argument(
@@ -111,11 +128,17 @@ def main():
 
     args = parser.parse_args()
 
+    preview_width, preview_height = get_resolution_preset(
+        args.resolution,
+        width=args.width,
+        height=args.height
+    )
+
     picam2 = Picamera2()
 
     config = picam2.create_preview_configuration(
         main={
-            "size": (args.width, args.height),
+            "size": (preview_width, preview_height),
             "format": "RGB888"
         }
     )

@@ -18,14 +18,41 @@ def run_command(command):
         print("Proceso interrumpido por el usuario.")
 
 def live_preview():
+    print("")
+    print("Selecciona calidad de vista/captura:")
+    print("1. HD    1280 x 720    rapido")
+    print("2. FHD   1920 x 1080   recomendado para dataset")
+    print("3. QHD   2304 x 1296   mas detalle")
+    print("4. FULL  4608 x 2592   maxima calidad, mas lento")
+
+    option = input("Opcion: ").strip()
+
+    quality_map = {
+        "1": "hd",
+        "2": "fhd",
+        "3": "qhd",
+        "4": "full"
+    }
+
+    if option not in quality_map:
+        print("Opcion no valida. Se usara HD.")
+        resolution = "hd"
+    else:
+        resolution = quality_map[option]
+
     command = [
         PYTHON,
         "scripts/live_camera_preview.py",
+        "--resolution",
+        resolution,
         "--focus-mode",
         "continuous",
         "--warmup",
-        "2"
+        "2",
+        "--jpeg-quality",
+        "95"
     ]
+
     run_command(command)
 
 
