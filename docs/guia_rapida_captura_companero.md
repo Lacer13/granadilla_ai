@@ -160,3 +160,27 @@ La vista en vivo sirve para:
 - verificar que el fondo sea uniforme
 
 Antes de capturar el dataset real, usar primero la vista en vivo y ajustar la posicion de la granadilla.
+
+## Captura desde vista en vivo con teclas
+
+La vista en vivo permite acomodar la granadilla y guardar la imagen presionando una tecla.
+
+Ejecutar:
+
+python scripts/live_camera_preview.py
+
+Teclas disponibles:
+
+- 1: guardar como granadilla buena
+- 2: guardar como granadilla golpeada
+- 3: guardar como granadilla inmadura
+- 4: guardar como prueba
+- r: reenfocar
+- q: salir
+- ESC: salir
+
+Importante:
+
+Para que las teclas funcionen, primero hacer clic sobre la ventana de la camara.
+
+Esta opcion es recomendada cuando se desea acomodar manualmente la granadilla y capturarla en diferentes posiciones.

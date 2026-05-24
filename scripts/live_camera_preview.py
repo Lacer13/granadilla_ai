@@ -22,6 +22,13 @@ CLASS_FOLDERS = {
     "prueba": "pruebas",
 }
 
+KEY_CLASS_MAP = {
+    ord("1"): "buena",
+    ord("2"): "golpeada",
+    ord("3"): "inmadura",
+    ord("4"): "prueba",
+}
+
 def get_output_folder(class_name):
     folder_name = CLASS_FOLDERS.get(class_name)
 
@@ -34,18 +41,18 @@ def get_output_folder(class_name):
     return output_folder
 
 
-def save_preview_frame(frame_bgr, metadata, class_name, sharpness):
+def save_live_frame(frame_bgr, metadata, class_name, sharpness):
     output_folder = get_output_folder(class_name)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"{class_name}_preview_{timestamp}.jpg"
+    filename = f"{class_name}_live_{timestamp}.jpg"
     output_path = output_folder / filename
 
     cv2.imwrite(str(output_path), frame_bgr)
 
     extra_data = {
         "class_name": class_name,
-        "source": "live_preview",
+        "source": "live_camera_preview",
         "sharpness_score": sharpness
     }
 
@@ -56,14 +63,15 @@ def save_preview_frame(frame_bgr, metadata, class_name, sharpness):
     )
 
     print("")
-    print("Imagen guardada desde vista en vivo:")
+    print("Imagen guardada:")
     print(output_path)
-    print("Metadata:")
-    print(metadata_path)
+    print("Clase:", class_name)
+    print("Nitidez:", round(sharpness, 2))
+    print("Metadata:", metadata_path)
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Vista en vivo para Raspberry Pi Camera Module 3"
+        description="Vista en vivo con captura por teclas para Raspberry Pi Camera Module 3"
     )
 
     parser.add_argument(
@@ -101,13 +109,6 @@ def main():
         help="Posicion manual del lente si se usa focus-mode manual"
     )
 
-    parser.add_argument(
-        "--save-class",
-        choices=["buena", "golpeada", "inmadura", "prueba"],
-        default="prueba",
-        help="Clase usada si se guarda una imagen con la tecla s"
-    )
-
     args = parser.parse_args()
 
     picam2 = Picamera2()
@@ -127,10 +128,13 @@ def main():
         print("")
         print("Iniciando vista en vivo...")
         print("Teclas disponibles:")
+        print("1  : guardar como granadilla buena")
+        print("2  : guardar como granadilla golpeada")
+        print("3  : guardar como granadilla inmadura")
+        print("4  : guardar como prueba")
+        print("r  : reenfocar")
         print("q  : salir")
         print("ESC: salir")
-        print("s  : guardar imagen de prueba")
-        print("r  : reenfocar usando autofocus trigger")
         print("")
 
         picam2.start()
@@ -158,8 +162,9 @@ def main():
                 print("No se pudo obtener frame de camara.")
                 continue
 
-            text_1 = "Camera V3 Preview | q: salir | s: guardar | r: reenfocar"
-            text_2 = f"Nitidez: {sharpness:.2f} | Modo enfoque: {args.focus_mode}"
+            text_1 = "1: buena | 2: golpeada | 3: inmadura | 4: prueba"
+            text_2 = "r: reenfocar | q/ESC: salir"
+            text_3 = f"Nitidez: {sharpness:.2f} | Enfoque: {args.focus_mode}"
 
             cv2.putText(
                 frame_bgr,
@@ -181,7 +186,20 @@ def main():
                 2
             )
 
-            cv2.imshow("Raspberry Pi Camera Module 3 - Vista en vivo", frame_bgr)
+            cv2.putText(
+                frame_bgr,
+                text_3,
+                (20, 105),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.7,
+                (255, 255, 255),
+                2
+            )
+
+            cv2.imshow(
+                "Raspberry Pi Camera Module 3 - Captura en vivo",
+                frame_bgr
+            )
 
             key = cv2.waitKey(1) & 0xFF
 
@@ -189,17 +207,18 @@ def main():
                 print("Cerrando vista en vivo.")
                 break
 
-            if key == ord("s"):
-                save_preview_frame(
-                    frame_bgr,
-                    metadata,
-                    args.save_class,
-                    sharpness
-                )
-
             if key == ord("r"):
                 print("Reenfocando...")
                 trigger_autofocus(picam2, wait_time=1.0)
+
+            if key in KEY_CLASS_MAP:
+                class_name = KEY_CLASS_MAP[key]
+                save_live_frame(
+                    frame_bgr,
+                    metadata,
+                    class_name,
+                    sharpness
+                )
 
     finally:
         picam2.stop()
